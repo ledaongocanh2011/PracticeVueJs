@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+    <div id="app2">
+        {{ message }}
+        {{ state }}
+        <h1 v-if="1 === 1">123123</h1>
+    </div>
+    <div id="app-3">
+        <span v-if="seen">Thoắt ẩn thoắt hiện</span>
+    </div>
+    <div id="app1">
+        <p>{{ foo }}</p>
+        <!-- foo sẽ không được cập nhật! -->
+        <button @click="foo = 'baz'">Cập nhật đi chứ</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Do you wanna build a Vue app?'
+            }
+        })
+
+        var app = new Vue({
+            el: '#app2',
+            data: {
+                message: 'Do you wanna build a Vue app 2?',
+                state: 'something'
+            },
+            mounted() {
+                setInterval(() => {
+                    this.state = new Date()
+                }, 1000)
+            }
+        })
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                seen: false
+            }
+        })
+        var data = { a: 1 };
+        var vm = new Vue({
+            data: data
+        })
+        vm.a == data.a;
+        vm.a = 2;
+        console.log(data.a);
+        var obj = {
+            foo: 'bar'
+        }
+
+        Object.freeze(obj)
+
+        new Vue({
+            el: '#app1',
+            data: obj
+        })
+    </script>
+</body>
+
+</html>

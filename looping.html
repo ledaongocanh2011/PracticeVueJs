@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div id="looping">
+        <ul>
+            <li v-for="(character,index) in characters">{{index}} + {{character}}</li>
+        </ul>
+        <ul>
+            <li v-for="(information,index) in informations">{{index}}.{{information.name}} - {{information.age}}</li>
+        </ul>
+        <template v-for="information in informations">
+            <div v-for="(val,key) in information">
+                <p>{{key}} - {{val}}</p>
+            </div>
+        </template>
+
+    </div>
+
+    <script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#looping',
+            data: {
+                characters: ['quan xi', 'chun kai', 'wang yuan', 'yang yang', 'yang mi'],
+                informations: [
+                    { name: 'yan ka', age: 16 },
+                    { name: 'o tong', age: 17 },
+                    { name: 'xiao tung', age: 16 },
+                    { name: 'da ren', age: 23 },
+                    { name: 'fu ren', age: 22 }
+                ]
+            },
+            methods: {
+
+            },
+            computed: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

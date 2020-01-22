@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="person">
+        <button @click="A++">tui la A</button>
+        <span>A la: {{A}}</span><br />
+        <button @click="B++">con tui la B</button>
+        <span>B la: {{B}}</span><br />
+        <p>Age + A = {{addToA}}</p>
+        <p>Age + B = {{addToB}}</p>
+
+    </div>
+
+    <script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+    <script>
+        new Vue({
+            el: '#person',
+            data: {
+                age: 19,
+                A: 0,
+                B: 0,
+            },
+            // methods: {
+            //     addToA: function () {
+            //         console.log('addToA')
+            //         return this.A + this.age;
+            //     },
+            //     addToB: function () {
+            //         console.log('addToB')
+            //         return this.B + this.age;
+            //     },
+            // },
+            computed:{
+                addToA: function () {
+                    console.log('addToA')
+                    return this.A + this.age;
+                },
+                addToB: function () {
+                    console.log('addToB')
+                    return this.B + this.age;
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

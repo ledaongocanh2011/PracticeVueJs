@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div id="condition">
+        <button @click="success = !success">up</button>
+        <button @click="error = !error">down</button>
+        <!-- <p v-if="error">:((( error mat oy</p>
+        <p v-else-if="success">:))) success roy yeahhh</p> -->
+        <p v-show="error">lỗi mất tiu</p>
+        <p v-show="success">thành công oy :))))</p>
+    </div>
+    <script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#condition',
+            data: {
+                success: false,
+                error: false
+            }
+        })
+    </script>
+</body>
+
+</html>

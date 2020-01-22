@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        #ball button {
+            width: 40px;
+            min-height: 35px;
+            padding: 5px;
+            border: 1px;
+            border-radius: 50%;
+            background: crimson;
+            text-align: center;
+            margin: 7px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="shootTheBall">
+        <!-- ball-->
+        <div id="ball">
+            <template>
+                <div v-for="ball in balls">
+                    <button @click.once="broken(ball.id)" :style="{background: ball.bg}">{{ball.id}}</button>
+                </div>
+
+            </template>
+        </div>
+        <!-- controls-->
+        <button @click="start">start</button>
+
+    </div>
+    <script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#shootTheBall',
+            data: {
+                balls: [
+                    { id: 10, status: 0, bg: 'crimson' },
+                    { id: 20, status: 0, bg: 'crimson' },
+                    { id: 30, status: 0, bg: 'crimson' },
+                    { id: 40, status: 0, bg: 'crimson' },
+                    { id: 50, status: 0, bg: 'crimson' },
+                    { id: 60, status: 0, bg: 'crimson' },
+                    { id: 70, status: 0, bg: 'crimson' },
+                    { id: 80, status: 0, bg: 'crimson' },
+                ],
+                ended: null,
+
+            },
+            methods: {
+                broken: function (ballId) {
+                    // tìm index của phần tử thỏa mãn điều kiện là phần tử đó có id bằng ballId
+                    let index = this.balls.findIndex(function (element) {
+                        return element.id === ballId;
+                    })
+                    // từ đối tượng vue trỏ tới thuộc tính ball và cập nhật lại bg của phần tử  có index vừa tìm thấy ở trên 
+                    this.balls[index].bg = 'green';
+                    this.balls[index].status = 1;
+                    //đếm xem có bao nhiêu obj có status = 1, status = 1 là số quả bóng đã được đập vỡ
+                    var count = 0;
+                    for (var i = 0; i < this.balls.length; ++i) {
+                        if (this.balls[i].status == 1)
+                            count++;
+                    }
+                    // kiểm tra nếu như độ dài của obj đó ( tức là số quả bóng đã được đập) bằng với độ dài của bộ đếm trên kia thì cho xóa bỏ cái thời gian đã đinh
+
+                    if (this.balls.length == count) {
+                        clearTimeout(this.ended);
+                    }
+                },
+                start: function () {
+                    this.ended = setTimeout(function () {
+                        alert("stop");
+                    }, 9000)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        #ball button {
+            width: 40px;
+            min-height: 35px;
+            padding: 5px;
+            border: 1px;
+            border-radius: 50%;
+            background: green;
+            text-align: center;
+            margin: 7px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- array balls-->
+    <div id="football">
+        <div id="ball">
+            <template>
+                <div v-for="ball in balls">
+                    <!-- this: là đối tượng vue, 
+                        Vì thằng ball là đối tượng rồi hé, nên lấy thuộc tính ra bằng dấu " ." hé :)))-->
+                    <button @click="broken(ball.id)" :style="{background: ball.bg}">{{ball.id}}</button>
+                </div>
+            </template>
+        </div>
+
+        <!-- controls-->
+        <button @click="start">start</button>
+
+    </div>
+
+    <script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#football',
+            data: {
+                balls: [
+                    { id: 1, status: 0, bg: 'pink' },
+                    { id: 2, status: 0, bg: 'pink' },
+                    { id: 3, status: 0, bg: 'pink' },
+                    { id: 4, status: 0, bg: 'pink' },
+                    { id: 5, status: 0, bg: 'pink' },
+                    { id: 6, status: 0, bg: 'pink' },
+                    { id: 7, status: 0, bg: 'pink' },
+                    { id: 8, status: 0, bg: 'pink' },
+                    { id: 9, status: 0, bg: 'pink' },
+                    { id: 10, status: 0, bg: 'pink' },
+
+                ],
+                ended: null,
+            },
+            methods: {
+                // dư này là: tham số truyền vào là ballId, bởi vì khi gọi cái hàm broken này ở trên cái nut button kia
+                // mình có truyền vào ball.id mà . đây này: @click="broken(ball.id)"
+                broken: function (ballId) {
+                    // dư này là: thằng đối tượng vue trỏ đến phần tử của nó là một arr( balls)  this.balls
+                    // sau đó dùng hàm findIndex, tìm ra vị trí index của từng obj trong mảng
+                    // hàm findIndex(callBack, thisArrr); tức là phần tử của thằng arr đấy ý
+                    let index = this.balls.findIndex(function (element) {
+                        // phần tử của thằng arr (balls) chính là các obj của nó ý, lấy ra thằng id này 
+                        // rồi check xem có trùng với thằng id đang chịu tác động click không, 
+                        // hiểu là tìm và xác định thằng muốn bắn bỏ nó, giết nhầm thì toi.
+                        return element.id === ballId;
+                    })
+                    // dư này nhé: this.balls như trên kia là mảng, this.balls[index]:gọi phần tử mảng
+                    // mà phần tử đó là obj, ".bg ": lôi cổ thuộc tính bg của nó ra thôi
+                    this.balls[index].bg = 'green';
+                    this.balls[index].status = 1;
+                    // thằng này là đếm xem số phần tử (this.balls[i] == 1) đã bị vỡ bóng có bằng số bóng ban đầu không
+                    // nếu bằng thì kết thúc luôn, không phải hiển thị thông báo đã hết giờ nữa
+                    var count = 0;
+                    for (var i = 0; i < this.balls.length; i++) {
+                        if (this.balls[i] == 1) {
+                            clearTimeout(this.ended)
+                        }
+                    }
+                },
+                start: function () {
+                    setTimeout(function () {
+                        alert("xi top, het gio roi thanh nien eiiii. THUA NHÉ ");
+                    }, 10000)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+<!-- logic cua bai toan la du nay: 
+ - đầu tiên: tạo một array, có các phần tử là một obj . trong obj nó có các thuộc tính của cái đối tượng đó.
+    Đừng có hiểu là đối tượng vue là được, vì đối tượng vue có thể dùng this. còn thằng này chỉ là
+     phần tử có dạng là một đối tượng thôi :))) ( nhớ xì tai cho cái đối tượng đó giống quả bóng là oke)
+
+ - sau đó : dùng vòng lặp v-for để duyệt mảng và in ra được thuộc tính id của từng đối tượng trong mảng. 
+ Mục đích lấy id là để xác đinh được đối tượng sau này mình cần làm việc tới
+
+ - tiếp theo : dùng sự kiện click( đặt trong vòng for để xác định cái sự kiện này là cho từng phần tử của mảng)
+ sau đó đặt một phụ thuộc cho cái thẻ chứa đối tượng đó , để thay đổi cái xì tai cho nó khác đi,
+ để người ta còn biết là cái đối tượng này sau khi bấm xong nó có sự thay đổi chứ nhể :))
+
+ - tiếp đến là built cái sự kiện xử lí của đối tượng vừa nãy: 
+    + Muốn biết thằng mình vừa bấm vào nó là thằng nào nó ở vị trí bao nhiêu để xử lí cho đúng thì phải tìm ra vị triis index của nó
+    + Rồi từ cái thằng index vừa lấy được đấy thì thay đổi cái thuộc tính muốn thay đổi thôi :)))
+    + theo đề bài là phải đặt thời gian cho nó( chơi mà không có thời gian thì dẹp mọe đi) ,
+
+     - nếu là thanh niên quay tay nhanh, xong trước thời gian thì ok thành công, còn không mà quá thời hạn 
+     thì phải thông báo cho thanh niên ấy biết là hết mọe thời gian rồi . 
+
+      - vậy phải làm sao mới biết dư thế nào là xong, còn dư nào là quá thời hạn. oke giải dư này 
+       + mình dang có cái thằng status = 1 là bấm rồi bóng vỡ mọe rồi: nếu bấm cho vỡ hết chả còn quả nào thì là end game thôi
+       việc của mình là đếm xem cái thằng bóng vỡ( status = 1) có bằng độ dài của cái mảng cho trên kia không, 
+       ( tức là số bóng vỡ có bằng tổng số bóng có lúc đầu không) . nếu bằng thì end thôi . ( giới hạn thời gian là 10s nhé)
+
+-->

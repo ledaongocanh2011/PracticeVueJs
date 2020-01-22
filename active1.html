@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="demo-vue">
+        <h3>{{name}}</h3>
+        <h3>{{age}}</h3>
+        <!-- <button v-on:click="age++">them 1 tuoi</button> -->
+        <button v-on:click="add">add 1 year</button>
+        <!-- <button v-on:click="age--">bot 1 tuoi</button> -->
+        <button v-on:click="low">low 1 year</button>
+        <a :href="faceBook">faceBook</a>
+        <!-- <button v-on:dbClick="addTenYear">them 10 nam</button>
+        <button v-on:dbClick="lowTenYear">giam 10 nam</button> -->
+        <input type="text" :value="age">
+        <p v-html="links"></p>
+        <!-- <h2>{{greet(" buoi trua vui ve")}}</h2> -->
+        <!-- Phuong thu inline-->
+        <button @click="say('hello')">test</button>
+        <button @click="bye">click me</button>
+        <label for="">Name</label>
+        <input type="text" @keyup.alt.enter="logName">
+        <label for="">tuoi</label>
+        <input type="text" @keyup="logAge">
+
+
+    </div>
+    <script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+    <script>
+        new Vue({
+            el: "#demo-vue",
+            data: {
+                name: 'ngoc anh',
+                age: 19,
+                faceBook: 'https://facebook.giangngoc2011',
+                links: '<a href="https://facebook.giangngoc2011">links faceBook</a>'
+            },
+            methods: {
+                greet: function (time) {
+                    alert("xin chao thanh nien " + this.name + time);
+                },
+                add: function () {
+                    this.age++;
+                },
+                low: function () {
+                    this.age--;
+                },
+                say: function (message) {
+                    alert(message);
+                },
+                bye: function () {
+                    alert("bye bye em nhe");
+                },
+                logName:function() {
+                    console.log("bam vo tui de co dieu ki dieu xay ra voi nem");
+                },
+                logAge:function() {
+                    console.log("bam vo tui de co dieu ki dieu xay ra voi ec");
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

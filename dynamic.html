@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+    .avaiable span{
+        background:green;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="dynamic">
+        <div @click="avaiable = !avaiable" v-bind:class="{avaiable:avaiable}">
+            <span>ngoc anh</span>
+        </div>
+    </div>
+    <script src=" https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#dynamic',
+            data: {
+                avaiable: true,
+            },
+            methods: {
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>
